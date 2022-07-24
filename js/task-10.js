@@ -1,34 +1,42 @@
 
-const butonCreate = document.querySelector('[data-create="Create"]');
-const butonDestroy = document.querySelector('[data-destroy="Destroy"]');
-const boxes = document.getElementById("boxes");
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
+const CreateBtn = document.querySelector("[data-create]");
+const destroyBtn = document.querySelector("[data-destroy]");
+const boxes = document.querySelector("#boxes");
 
-butonCreate.addEventListener("click", getAmount);
-butonDestroy.addEventListener('click', destroyBoxes);
+boxes.style.display = "flex";
+boxes.style.flexDirection = "row";
+boxes.style.flexWrap = "wrap";
+const startSize = 30;
+const step = 10;
 
+CreateBtn.addEventListener("click", hendlerCreateyBtn);
+destroyBtn.addEventListener("click", hendlerDestroyBtn);
 
-function getAmount() {
-  const amount = +document.querySelector("#controls input").value;
+function hendlerCreateyBtn(event) {
+  const amount = document.querySelector("#controls input").value;
   createBoxes(amount);
 }
 function createBoxes(amount) {
-  const basicSize = 30;
+  if (amount > 50) {
+    alert("Error");
+  }
+
   const fragment = document.createDocumentFragment();
-  for (const i = 0; i < amount; i++) {
-    const size = basicSize + i * 10;
-    const div = document.createElement("div");
-    div.style.cssText = `width: ${size}px; height: ${size}px; background-color: rgba( ${random()} , ${random()} , ${random()} )`;
-    fragment.appendChild(div);
+  for (let i = 0; i < amount; i++) {
+    const boxEl = document.createElement("div");
+    const sizeBox = startSize + i*step;
+    boxEl.className = "newDiv";
+    boxEl.style.width = `${sizeBox}px`;
+    boxEl.style.height = `${sizeBox}px`;
+    boxEl.style.backgroundColor = `${getRandomHexColor()}`;
+    fragment.appendChild(boxEl);
   }
   boxes.appendChild(fragment);
 }
 
-function destroyBoxes() {
+function hendlerDestroyBtn() {
   boxes.innerHTML = "";
 }
-
-
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
-
