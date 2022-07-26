@@ -6,6 +6,7 @@ function quantitiSimbol(event) {
         inputEl.classList.remove("invalid");
         inputEl.classList.add("valid");
     }
-    else{inputEl.classList.add("invalid")};
+    else{inputEl.classList.add("invalid")
+    inputEl.classList.remove("valid");};
 }
 inputEl.addEventListener("blur",quantitiSimbol)
